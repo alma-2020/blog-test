@@ -40,7 +40,28 @@ export const DesktopMenuDiv = styled.div`
     display: none;
 
     @media only screen and (min-width: 1225px) {
-        display: unset;
+        display: flex;
+        flex-direction: row;
+    }
+`;
+
+
+export const DesktopMenuItem = styled.div`
+    margin-left: 10px;
+    user-select: none;
+
+    a {
+        font-size: 20px;
+        color: #f48fb1;
+        background-color: unset;
+        padding: 12px;
+        border-radius: 3px;
+        transition: color .2s linear, background-color .2s linear;
+    }
+
+    a:hover {
+        background-color: #f48fb1;
+        color: white;
     }
 `;
 

@@ -14,6 +14,7 @@ import {
     MenuContentItem,
     MobileMenuDiv,
     DesktopMenuDiv,
+    DesktopMenuItem,
     Overlay,
 } from '../styles/navbarStyles'
 
@@ -26,12 +27,12 @@ interface MenuProps {
     items: MenuItems[];
 };
 
-const Navbar: FC = () => {
-    const menuItems: MenuItems[] = [
-        { label: 'Home', link: '/' },
-        { label: 'About us', link: '/' },
-    ];
-    
+const menuItems: MenuItems[] = [
+    { label: 'Home', link: '/' },
+    { label: 'About us', link: '/' },
+];
+
+const Navbar: FC = () => {    
     return (
         <NavbarDiv>
             <Link href="/">
@@ -90,7 +91,13 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
 const DesktopMenu: FC<MenuProps> = ({ items }) => {
     return (
         <DesktopMenuDiv>
-            <p>Imagine um menu legal aqui</p>
+            {items.map((item, i) => (
+                <DesktopMenuItem key={i}>
+                    <Link href={item.link}>
+                        {item.label}
+                    </Link>
+                </DesktopMenuItem>
+            ))}
         </DesktopMenuDiv>
     );
 };
