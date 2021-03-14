@@ -23,7 +23,7 @@ export const NavbarDiv = styled.div`
     padding-right: 30px;
 
     a.title {
-        color: #f06291;
+        color: #f48fb1;
         font-size: 25px;
     }
 `;
@@ -48,9 +48,9 @@ export const OpenMenuButton = styled.button`
     border: none;
     padding: 15px 20px;
     color: white;
-    background-color: #f06291;
+    background-color: #f48fb1;
     border-radius: 8px;
-    box-shadow: gray 0px 0px 10px 0.5px;
+    box-shadow: #c6c6c6 0px 0px 10px 0.5px;
     font-size: 18px;
     outline: none;
 
@@ -66,7 +66,7 @@ export const CloseMenuButton = styled.button`
     margin-top: 0px;
     border: none;
     border-radius: 4px;
-    background: #f06291;
+    background: #f48fb1;
     color: white;
     padding: 8px;
     font-size: 35px;
@@ -76,7 +76,7 @@ export const CloseMenuButton = styled.button`
 
 export const Menu = styled.div<MenuProps>`
     position: fixed;
-    background: #f06291;
+    background: #f48fb1;
     height: 100%;
     width: 100%;
     top: 0;
@@ -88,6 +88,39 @@ export const Menu = styled.div<MenuProps>`
     ${(props) => (props.isOpen && css`
         transform: translateX(0%);
     `)}
+`;
+
+export const MenuContent = styled.div`
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+`;
+
+export const MenuContentItem = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 50px;
+    box-shadow: #bf5f82 0px 0px 3px 1px;
+    border-radius: 4px;
+
+    a {
+        border-radius: 4px;
+        width: 200px;
+        height: 50px;
+        padding: 12px;
+        background: #bf5f82;
+        color: white;
+        width: 100%;
+    }
 `;
 
 export const Overlay = styled.div<OverlayProps>`

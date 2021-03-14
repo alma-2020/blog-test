@@ -9,12 +9,28 @@ import {
     OpenMenuButton, 
     CloseMenuButton,
     Menu,
+    MenuContent,
+    MenuContentItem,
     MobileMenuDiv,
     DesktopMenuDiv,
     Overlay,
 } from '../styles/navbarStyles'
 
+interface MenuItems {
+    label: string; 
+    link: string;
+}
+
+interface MenuProps {
+    items: MenuItems[];
+};
+
 const Navbar: FC = () => {
+    const menuItems: MenuItems[] = [
+        { label: 'Home', link: '/' },
+        { label: 'About us', link: '/' },
+    ];
+    
     return (
         <NavbarDiv>
             <Link href="/">
@@ -23,45 +39,18 @@ const Navbar: FC = () => {
                 </a>
             </Link>
 
-            <MobileMenu />
-            <DesktopMenu />
+            <MobileMenu items={menuItems} />
+            <DesktopMenu items={menuItems} />
         </NavbarDiv>
     );
 };
 
-const MobileMenu: FC = () => {
+const MobileMenu: FC<MenuProps> = ({ items }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
-    useEffect(() => {
-        if (typeof document === 'undefined')
-            return;
-
-        if (isSidebarOpen) {
-            // block scroll while the modal is open and set a margin on the 
-            // page with the same width as the scrollbar so that the content 
-            // doesn't jump around when the scrollbar appears/disappears 
-
-            let marginRightPx = 0;
-            if (window.getComputedStyle) {
-                const bodyStyle = window.getComputedStyle(document.body);
-                if (bodyStyle) {
-                    marginRightPx = parseInt(bodyStyle.marginRight, 10);
-                }
-            }
-
-            let scrollbarWidthPx = window.innerWidth - document.body.clientWidth;
-            Object.assign(document.body.style, {
-                overflowY: 'hidden',
-                marginRight: `${marginRightPx + scrollbarWidthPx}px`,
-            });
-        }
-        else {
-            Object.assign(document.body.style, {
-                overflowY: 'unset',
-                marginRight: `0px`,
-            });
-        }
-    }, [isSidebarOpen]);
+    const handleLinkClick = () => {
+        setIsSidebarOpen(false);
+    };
 
     return (
         <MobileMenuDiv>
@@ -77,6 +66,19 @@ const MobileMenu: FC = () => {
                 >
                     X
                 </CloseMenuButton>
+
+                <MenuContent>
+                    {items.map((item, i) => (
+                        <MenuContentItem 
+                            key={i}
+                            onClick={handleLinkClick}
+                            >
+                            <Link href={item.link} >
+                                {item.label}
+                            </Link>
+                        </MenuContentItem>
+                    ))}
+                </MenuContent>
             </Menu>
 
             <Overlay show={isSidebarOpen} />
@@ -84,7 +86,7 @@ const MobileMenu: FC = () => {
     );
 };
 
-const DesktopMenu: FC = () => {
+const DesktopMenu: FC<MenuProps> = ({ items }) => {
     return (
         <DesktopMenuDiv>
             <p>Imagine um menu legal aqui</p>
