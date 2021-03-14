@@ -4,6 +4,7 @@ import React, {
     useState,
 } from 'react'
 import Link from 'next/link'
+import { MdMenu, MdClose } from 'react-icons/md'
 import { 
     NavbarDiv, 
     OpenMenuButton, 
@@ -57,14 +58,14 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
             <OpenMenuButton
                 onClick={() => setIsSidebarOpen(true)}
             >
-                MENU
+                <MdMenu size={40} />
             </OpenMenuButton>
         
             <Menu isOpen={isSidebarOpen}>
                 <CloseMenuButton
                     onClick={() => setIsSidebarOpen(false)}
                 >
-                    X
+                    <MdClose size={50} />
                 </CloseMenuButton>
 
                 <MenuContent>

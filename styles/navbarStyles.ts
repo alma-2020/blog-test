@@ -45,32 +45,42 @@ export const DesktopMenuDiv = styled.div`
 `;
 
 export const OpenMenuButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    padding: 15px 20px;
-    color: white;
-    background-color: #f48fb1;
-    border-radius: 8px;
-    box-shadow: #c6c6c6 0px 0px 10px 0.5px;
+    //padding: 5px 25px;
+    padding: 5px 10px;
+    color: #f48fb1;
+    background-color: #fafafa;
+    //color: white;
+    //background-color: #f48fb1;
+    //border-radius: 8px;
+    //box-shadow: #c6c6c6 0px 0px 10px 0.5px;
     font-size: 18px;
     outline: none;
 
+    /*
     &:active {
         background-color: #f48fb0;
     }
+    */
 `;
 
 export const CloseMenuButton = styled.button`
     display: flex;
     margin-left: auto;
-    margin-right: 30px;
+    //margin-right: 30px;
     margin-top: 0px;
     border: none;
     border-radius: 4px;
     background: #f48fb1;
     color: white;
-    padding: 8px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
     font-size: 35px;
-    padding: 20px;
     outline: none;
 `;
 
@@ -126,8 +136,9 @@ export const MenuContentItem = styled.div`
 export const Overlay = styled.div<OverlayProps>`
     position: fixed;
     background: black;
-    height: 0;
-    width: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
     top: 0;
     left: 0;
     opacity: 0;
@@ -135,7 +146,5 @@ export const Overlay = styled.div<OverlayProps>`
 
     ${(props) => (props.show && css`
         opacity: 0.6;
-        width: 100%;
-        height: 100%;
     `)}
 `;
