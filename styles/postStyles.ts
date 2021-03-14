@@ -29,3 +29,15 @@ export const ImageAndCaptionContainer = styled.div`
         color: #5b5b5b;
     }
 `;
+
+export const PostDiv = styled.div`
+    max-width: 36rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+`;
+
+export const ContentWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import Lightbox from 'react-image-lightbox'
 import 'react-image-lightbox/style.css'
@@ -10,11 +11,14 @@ import React, {
 import Layout from '../../components/layout'
 import Date from '../../components/date'
 import utilStyles from '../styles/utils.module.css'
+import styles from '../../components/layout.module.css';
 import { Post, getAllPostIds, getPostData } from '../../lib/posts'
 import { 
     Image, 
     ImageAndCaptionContainer, 
     ImageContainer,
+    PostDiv,
+    ContentWrapper
 } from '../../styles/postStyles'
 
 interface Props {
@@ -136,63 +140,73 @@ const PostPage: FC<Props> = ({ postData }) => {
 
     return (
         <Layout>
-            <Head>
-                <title>A COOL BLOG - {postData.title}</title>
-            </Head>
+            <PostDiv>
+                <Head>
+                    <title>A COOL BLOG - {postData.title}</title>
+                </Head>
 
-            <article>
-                <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+                <ContentWrapper>
+                    <article>
+                        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
 
-                <div 
-                    style={{ marginBottom: '18px' }}
-                    className={utilStyles.lightText}
-                >
-                    <Date dateString={postData.date} />
+                        <div 
+                            style={{ marginBottom: '18px' }}
+                            className={utilStyles.lightText}
+                        >
+                            <Date dateString={postData.date} />
+                        </div>
+                        
+                        {/* Render our markdown content as HTML */} 
+                        <ReactMarkdown 
+                            children={postData.markdown}
+                            renderers={markdownRenderers} 
+                            allowDangerousHtml={true}
+                        />
+                    </article>
+                </ContentWrapper>
+
+                {isImageOpen && (
+                    <Lightbox
+                        mainSrc={images[imageIndex]}
+                        nextSrc={images[(imageIndex + 1) % images.length]}
+                        prevSrc={
+                            images[(imageIndex + images.length - 1) % images.length]
+                        }
+                        mainSrcThumbnail={images[imageIndex]}
+                        nextSrcThumbnail={images[(imageIndex + 1) % images.length]}
+                        prevSrcThumbnail={
+                            images[(imageIndex + images.length - 1) % images.length]
+                        }
+                        onCloseRequest={() => {
+                            setIsImageOpen(false);
+
+                            // re-enable the page scroll
+                            Object.assign(document.body.style, {
+                                overflowY: 'unset',
+                                marginRight: '0px',
+                            });
+                        }}
+                        onMovePrevRequest={() => {
+                            setImageIndex((imageIndex + images.length - 1) % images.length)
+                        }}
+                        onMoveNextRequest={() => {
+                            setImageIndex((imageIndex + 1) % images.length)
+                        }}
+                        onImageLoadError={() => {
+                            console.error('Image load error');
+                            setIsImageOpen(false);
+                        }}
+                        imageCaption={imageCaptions[imageIndex]}
+                        reactModalProps={{ shouldReturnFocusAfterClose: false }}
+                    />
+                )}
+
+                <div className={styles.backToHome}>
+                <Link href="/">
+                    <a>← Back to home</a>
+                </Link>
                 </div>
-                
-                {/* Render our markdown content as HTML */} 
-                <ReactMarkdown 
-                    children={postData.markdown}
-                    renderers={markdownRenderers} 
-                    allowDangerousHtml={true}
-                />
-            </article>
-
-            {isImageOpen && (
-                <Lightbox
-                    mainSrc={images[imageIndex]}
-                    nextSrc={images[(imageIndex + 1) % images.length]}
-                    prevSrc={
-                        images[(imageIndex + images.length - 1) % images.length]
-                    }
-                    mainSrcThumbnail={images[imageIndex]}
-                    nextSrcThumbnail={images[(imageIndex + 1) % images.length]}
-                    prevSrcThumbnail={
-                        images[(imageIndex + images.length - 1) % images.length]
-                    }
-                    onCloseRequest={() => {
-                        setIsImageOpen(false);
-
-                        // re-enable the page scroll
-                        Object.assign(document.body.style, {
-                            overflowY: 'unset',
-                            marginRight: '0px',
-                        });
-                    }}
-                    onMovePrevRequest={() => {
-                        setImageIndex((imageIndex + images.length - 1) % images.length)
-                    }}
-                    onMoveNextRequest={() => {
-                        setImageIndex((imageIndex + 1) % images.length)
-                    }}
-                    onImageLoadError={() => {
-                        console.error('Image load error');
-                        setIsImageOpen(false);
-                    }}
-                    imageCaption={imageCaptions[imageIndex]}
-                    reactModalProps={{ shouldReturnFocusAfterClose: false }}
-                />
-            )}
+            </PostDiv>
         </Layout>
     );
 };

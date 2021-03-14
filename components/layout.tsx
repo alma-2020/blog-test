@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import Head from 'next/head';
-
+import Link from 'next/link'
+import Head from 'next/head'
+import { FC } from 'react'
 import styles from './layout.module.css';
 import utilStyles from '../pages/styles/utils.module.css'
-import { FC } from 'react';
+import Navbar from './navbar'
 
 const name = "A COOL BLOG";
 export const siteTitle = 'A COOL BLOG';
@@ -38,6 +38,7 @@ const Layout: FC<Props> = ({
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Head>
             <header className={styles.header}>
+                {/*
                 {home ? (
                 <>
                     <img
@@ -65,15 +66,12 @@ const Layout: FC<Props> = ({
                     </h2>
                 </>
                 )}
+                */}
+
+                <Navbar />
             </header>
+
             <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                <Link href="/">
-                    <a>← Back to home</a>
-                </Link>
-                </div>
-            )}
         </div>
     );
 }
