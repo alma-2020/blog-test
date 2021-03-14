@@ -13,22 +13,22 @@ interface Props {
 
 const Home: FC<Props> = ({ allPostsData }) => {
     return (
-            <HomeDiv>
-                <Head>
+        <HomeDiv>
+            <Head>
                 <title>{siteTitle}</title>
-                </Head>
+            </Head>
 
-                <ContentWrapper>
-                <section className={utilStyles.headingMd}>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </p>
-                </section>
+            <ContentWrapper>
+            <section className={utilStyles.headingMd}>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                </p>
+            </section>
                 
-                <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-                    <h2 className={utilStyles.headingLg}>Blog</h2>
+            <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+                <h2 className={utilStyles.headingLg}>Blog</h2>
                 
-                    <ul className={utilStyles.list}>
+                <ul className={utilStyles.list}>
                     {allPostsData.map(post => (
                         <li className={utilStyles.listItem} key={post.id}>
                             <Link href={`/posts/${post.id}`}>
@@ -41,10 +41,10 @@ const Home: FC<Props> = ({ allPostsData }) => {
                             </small>
                         </li>
                     ))}
-                    </ul>
-                </section>
-                </ContentWrapper>
-            </HomeDiv>
+                </ul>
+            </section>
+            </ContentWrapper>
+        </HomeDiv>
     );
 };
 

@@ -139,73 +139,72 @@ const PostPage: FC<Props> = ({ postData }) => {
     }
 
     return (
-            <PostDiv>
-                <Head>
-                    <title>A COOL BLOG - {postData.title}</title>
-                </Head>
+        <PostDiv>
+            <Head>
+                <title>A COOL BLOG - {postData.title}</title>
+            </Head>
 
-                <ContentWrapper>
-                    <article>
-                        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+            <ContentWrapper>
+                <article>
+                    <h1 className={utilStyles.headingXl}>{postData.title}</h1>
 
-                        <div 
-                            style={{ marginBottom: '18px' }}
-                            className={utilStyles.lightText}
-                        >
-                            <Date dateString={postData.date} />
-                        </div>
+                    <div 
+                        style={{ marginBottom: '18px' }}
+                        className={utilStyles.lightText}
+                    >
+                        <Date dateString={postData.date} />
+                    </div>
                         
-                        {/* Render our markdown content as HTML */} 
-                        <ReactMarkdown 
-                            children={postData.markdown}
-                            renderers={markdownRenderers} 
-                            allowDangerousHtml={true}
-                        />
-                    </article>
-                </ContentWrapper>
-
-                {isImageOpen && (
-                    <Lightbox
-                        mainSrc={images[imageIndex]}
-                        nextSrc={images[(imageIndex + 1) % images.length]}
-                        prevSrc={
-                            images[(imageIndex + images.length - 1) % images.length]
-                        }
-                        mainSrcThumbnail={images[imageIndex]}
-                        nextSrcThumbnail={images[(imageIndex + 1) % images.length]}
-                        prevSrcThumbnail={
-                            images[(imageIndex + images.length - 1) % images.length]
-                        }
-                        onCloseRequest={() => {
-                            setIsImageOpen(false);
-
-                            // re-enable the page scroll
-                            Object.assign(document.body.style, {
-                                overflowY: 'unset',
-                                marginRight: '0px',
-                            });
-                        }}
-                        onMovePrevRequest={() => {
-                            setImageIndex((imageIndex + images.length - 1) % images.length)
-                        }}
-                        onMoveNextRequest={() => {
-                            setImageIndex((imageIndex + 1) % images.length)
-                        }}
-                        onImageLoadError={() => {
-                            console.error('Image load error');
-                            setIsImageOpen(false);
-                        }}
-                        imageCaption={imageCaptions[imageIndex]}
-                        reactModalProps={{ shouldReturnFocusAfterClose: false }}
+                    {/* Render our markdown content as HTML */} 
+                    <ReactMarkdown 
+                        children={postData.markdown}
+                        renderers={markdownRenderers} 
+                        allowDangerousHtml={true}
                     />
-                )}
+                </article>
+            </ContentWrapper>
 
-                <div className={styles.backToHome}>
-                <Link href="/">
-                    <a>← Back to home</a>
-                </Link>
-                </div>
-            </PostDiv>
+            {isImageOpen && (
+                <Lightbox
+                    mainSrc={images[imageIndex]}
+                    nextSrc={images[(imageIndex + 1) % images.length]}
+                    prevSrc={
+                        images[(imageIndex + images.length - 1) % images.length]
+                    }
+                    mainSrcThumbnail={images[imageIndex]}
+                    nextSrcThumbnail={images[(imageIndex + 1) % images.length]}
+                    prevSrcThumbnail={
+                        images[(imageIndex + images.length - 1) % images.length]
+                    }
+                    onCloseRequest={() => {
+                        setIsImageOpen(false);
+                        // re-enable the page scroll
+                        Object.assign(document.body.style, {
+                            overflowY: 'unset',
+                            marginRight: '0px',
+                        });
+                    }}
+                    onMovePrevRequest={() => {
+                        setImageIndex((imageIndex + images.length - 1) % images.length)
+                    }}
+                    onMoveNextRequest={() => {
+                        setImageIndex((imageIndex + 1) % images.length)
+                    }}
+                    onImageLoadError={() => {
+                        console.error('Image load error');
+                        setIsImageOpen(false);
+                    }}
+                    imageCaption={imageCaptions[imageIndex]}
+                    reactModalProps={{ shouldReturnFocusAfterClose: false }}
+                />
+            )}
+
+            <div className={styles.backToHome}>
+            <Link href="/">
+                <a>← Back to home</a>
+            </Link>
+            </div>
+        </PostDiv>
     );
 };
 
