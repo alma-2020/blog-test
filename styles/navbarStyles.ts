@@ -5,7 +5,7 @@ interface MenuProps {
 } 
 
 interface OverlayProps {
-    showOverlay: boolean;
+    show: boolean;
 }
 
 export const NavbarDiv = styled.div`
@@ -46,14 +46,14 @@ export const OpenMenuButton = styled.button`
 export const CloseMenuButton = styled.button`
     display: flex;
     margin-left: auto;
-    margin-right: 40px;
-    margin-top: 20px;
+    margin-right: 30px;
+    margin-top: 0px;
     border: none;
     border-radius: 4px;
     background: #f06291;
     color: white;
     padding: 8px;
-    font-size: 30px;
+    font-size: 35px;
     padding: 20px;
 `;
 
@@ -66,17 +66,26 @@ export const Menu = styled.div<MenuProps>`
     left: 0;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
+    z-index: 3;
     
     ${(props) => (props.isOpen && css`
         transform: translateX(0%);
     `)}
 `;
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<OverlayProps>`
     position: fixed;
     background: black;
-    height: 100%;
-    width: 100%;
+    height: 0;
+    width: 0;
     top: 0;
     left: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+
+    ${(props) => (props.show && css`
+        opacity: 0.4;
+        width: 100%;
+        height: 100%;
+    `)}
 `;

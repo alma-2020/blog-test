@@ -9,6 +9,7 @@ import {
     OpenMenuButton, 
     CloseMenuButton,
     Menu,
+    Overlay,
 } from '../styles/navbarStyles'
 
 const Navbar: FC = () => {
@@ -35,6 +36,8 @@ const Navbar: FC = () => {
                     X
                 </CloseMenuButton>
             </Menu>
+
+            <Overlay show={isSidebarOpen} />
         </NavbarDiv>
     );
 };
