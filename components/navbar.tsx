@@ -15,6 +15,15 @@ import {
 const Navbar: FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.style.overflowY = 'hidden';
+        }
+        else {
+            document.body.style.overflowY = 'unset';
+        }
+    }, [isSidebarOpen])
+
     return (
         <NavbarDiv>
             <Link href="/">

@@ -55,6 +55,7 @@ export const CloseMenuButton = styled.button`
     padding: 8px;
     font-size: 35px;
     padding: 20px;
+    outline: none;
 `;
 
 export const Menu = styled.div<MenuProps>`
@@ -81,10 +82,10 @@ export const Overlay = styled.div<OverlayProps>`
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity 0.2s linear;
+    transition: opacity 0.3s linear;
 
     ${(props) => (props.show && css`
-        opacity: 0.4;
+        opacity: 0.6;
         width: 100%;
         height: 100%;
     `)}

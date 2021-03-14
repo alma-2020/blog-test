@@ -34,6 +34,18 @@ export const PostDiv = styled.div`
     max-width: 36rem;
     padding: 0 1rem;
     margin: 3rem auto 6rem;
+
+    p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-word;
+
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
 `;
 
 export const ContentWrapper = styled.div`
