@@ -4,6 +4,7 @@ import React, {
     useState,
 } from 'react'
 import Link from 'next/link'
+import { useMediaQuery } from 'react-responsive'
 import { 
     NavbarDiv, 
     OpenMenuButton, 
@@ -13,16 +14,13 @@ import {
 } from '../styles/navbarStyles'
 
 const Navbar: FC = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
 
-    useEffect(() => {
-        if (isSidebarOpen) {
-            document.body.style.overflowY = 'hidden';
-        }
-        else {
-            document.body.style.overflowY = 'unset';
-        }
-    }, [isSidebarOpen])
+    const isTabletOrMobile = useMediaQuery({
+        maxWidth: 1224,
+    });
+
+    
 
     return (
         <NavbarDiv>
@@ -32,6 +30,30 @@ const Navbar: FC = () => {
                 </a>
             </Link>
 
+            {(isTabletOrMobile && (
+                <MobileMenu />
+            ))}
+        </NavbarDiv>
+    );
+};
+
+const MobileMenu: FC = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
+    useEffect(() => {
+        if (typeof document === 'undefined')
+            return;
+
+        if (isSidebarOpen) {
+            document.body.style.overflowY = 'hidden';
+        }
+        else {
+            document.body.style.overflowY = 'unset';
+        }
+    }, [isSidebarOpen]);
+
+    return (
+        <div>
             <OpenMenuButton
                 onClick={() => setIsSidebarOpen(true)}
             >
@@ -47,7 +69,7 @@ const Navbar: FC = () => {
             </Menu>
 
             <Overlay show={isSidebarOpen} />
-        </NavbarDiv>
+        </div>
     );
 };
 
