@@ -8,7 +8,7 @@ interface OverlayProps {
     show: boolean;
 }
 
-const MOBILE_MENU_WIDTH = 70;
+const MOBILE_MENU_WIDTH = '70%'; 
 
 export const NavbarDiv = styled.div`
     position: relative;
@@ -111,21 +111,18 @@ export const Menu = styled.div<MenuProps>`
     position: fixed;
     background: #f48fb1;
     height: 200%;
-    //width: 100%;
-    width: ${MOBILE_MENU_WIDTH}%;
+    width: ${MOBILE_MENU_WIDTH};
     margin: 0;
     top: 0;
-    left: 0;
+    //left: 0;
     right: 0;
-    //transform: translateX(100%);
-    transform: translateX(${100 + MOBILE_MENU_WIDTH}%);
+    transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     z-index: 3;
-    box-shadow: gray 0px 0px 10px 1px;
     
     ${(props) => (props.isOpen && css`
-        //transform: translateX(0%);
-        transform: translateX(43%);
+        transform: translateX(0%);
+        box-shadow: gray 0px 0px 10px 1px;
     `)}
 `;
 
@@ -164,11 +161,11 @@ export const MenuContentItem = styled.div`
 `;
 
 export const Overlay = styled.div<OverlayProps>`
+    pointer-events: none; // make use click through this element
     position: fixed;
     background: black;
     height: 200%;
     width: 100%;
-    pointer-events: none; // make use click through this element
     top: 0;
     left: 0;
     opacity: 0;
