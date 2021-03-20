@@ -4,7 +4,13 @@ import React, {
     useState,
 } from 'react'
 import Link from 'next/link'
-import { MdMenu, MdClose } from 'react-icons/md'
+import { 
+    MdMenu, 
+    MdClose, 
+    MdHome,
+    MdList,
+    MdInfo,
+} from 'react-icons/md'
 import { 
     NavbarDiv, 
     OpenMenuButton, 
@@ -21,6 +27,7 @@ import {
 interface MenuItems {
     label: string; 
     link: string;
+    icon?: () => JSX.Element;
 }
 
 interface MenuProps {
@@ -28,9 +35,21 @@ interface MenuProps {
 };
 
 const menuItems: MenuItems[] = [
-    { label: 'Home', link: '/' },
-    { label: 'Something', link: '/' },
-    { label: 'About us', link: '/' },
+    { 
+        label: 'Home', 
+        link: '/', 
+        icon: () => (<MdHome size={25} />), 
+    },
+    { 
+        label: 'Something', 
+        link: '/', 
+        icon: () => (<MdList size={25} />),
+    },
+    { 
+        label: 'About us', 
+        link: '/', 
+        icon: () => (<MdInfo size={25} />), 
+    },
 ];
 
 const Navbar: FC = () => {    
@@ -73,11 +92,16 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                 <MenuContent>
                     {items.map((item, i) => (
                         <MenuContentItem 
-                            key={i}
-                            onClick={handleLinkClick}
+                        key={i}
+                        onClick={handleLinkClick}
                         >
                             <Link href={item.link} >
-                                {item.label}
+                                <div style={{ width: '100%' }}>
+                                    {(typeof item.icon !== 'undefined') && (
+                                        item.icon()
+                                    )}
+                                    {item.label}
+                                </div>
                             </Link>
                         </MenuContentItem>
                     ))}
@@ -98,7 +122,9 @@ const DesktopMenu: FC<MenuProps> = ({ items }) => {
             {items.map((item, i) => (
                 <DesktopMenuItem key={i}>
                     <Link href={item.link}>
-                        {item.label}
+                        <div>
+                            {item.label}
+                        </div>
                     </Link>
                 </DesktopMenuItem>
             ))}

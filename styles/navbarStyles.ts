@@ -10,6 +10,11 @@ interface OverlayProps {
 
 const MOBILE_MENU_WIDTH = '70%'; 
 
+//const MENU_BACKGROUND_COLOR = '#f48fb1';
+const MENU_BACKGROUND_COLOR = 'whitesmoke';
+//const CLOSE_MENU_COLOR = 'white';
+const CLOSE_MENU_COLOR = '#f48fb1';
+
 export const NavbarDiv = styled.div`
     position: relative;
     width: 100%;
@@ -97,19 +102,19 @@ export const CloseMenuButton = styled.button`
     margin-top: 0px;
     border: none;
     border-radius: 4px;
-    background: #f48fb1;
-    color: white;
+    background: ${MENU_BACKGROUND_COLOR};
+    color: ${CLOSE_MENU_COLOR};
     padding-top: 15px;
     padding-bottom: 20px;
     padding-left: 20px;
-    padding-right: 25px;
+    padding-right: 30px;
     font-size: 35px;
     outline: none;
 `;
 
 export const Menu = styled.div<MenuProps>`
     position: fixed;
-    background: #f48fb1;
+    background: ${MENU_BACKGROUND_COLOR};
     height: 200%;
     width: ${MOBILE_MENU_WIDTH};
     margin: 0;
@@ -117,7 +122,7 @@ export const Menu = styled.div<MenuProps>`
     //left: 0;
     right: 0;
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    transition: box-shadow 0.3s linear, transform 0.3s ease-in-out;
     z-index: 3;
     
     ${(props) => (props.isOpen && css`
@@ -137,6 +142,7 @@ export const MenuContent = styled.div`
 `;
 
 export const MenuContentItem = styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,7 +155,10 @@ export const MenuContentItem = styled.div`
     border-radius: 4px;
     max-width: 90%;
 
-    a {
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 4px;
         width: 200px;
         height: 50px;
@@ -157,6 +166,10 @@ export const MenuContentItem = styled.div`
         background: #bf5f82;
         color: white;
         width: 100%;
+    }
+
+    svg {
+        margin-right: 5px;
     }
 `;
 
