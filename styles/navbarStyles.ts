@@ -57,7 +57,7 @@ export const DesktopMenuItem = styled.div`
     user-select: none;
     margin-left: 10px;
 
-    div {
+    a {
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -71,20 +71,12 @@ export const DesktopMenuItem = styled.div`
         transition: text-decoration .2s linear, 
                     color .2s linear, 
                     background-color .2s linear;
-    
-        a {
-            color: #f48fb1;
-        }
     }
 
-    div:hover {
+    a:hover {
         text-decoration: underline;
         background-color: #f48fb1;
         color: white;
-
-        a {
-            color: white;
-        }
     }
 
     svg {
@@ -175,7 +167,7 @@ export const MenuContentItem = styled.div`
     border-radius: 4px;
     max-width: 90%;
 
-    div {
+    a {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -186,10 +178,6 @@ export const MenuContentItem = styled.div`
         background: #bf5f82;
         color: white;
         width: 100%;
-
-        a {
-            color: white;
-        }
     }
 
     svg {

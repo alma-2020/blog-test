@@ -133,13 +133,13 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                             onClick={() => setIsSidebarOpen(false)}
                         >
                             <Link href={item.link} >
-                                <div style={{ width: '100%' }}>
+                                <a style={{ width: '100%' }}>
                                     {(typeof item.Icon !== 'undefined') && (
                                         <item.Icon size={25} />
                                     )}
 
-                                    <a>{item.label}</a>
-                                </div>
+                                    {item.label}
+                                </a>
                             </Link>
                         </MenuContentItem>
                     ))}
@@ -161,15 +161,15 @@ const DesktopMenu: FC<MenuProps> = ({ items }) => {
             {items.map((item, i) => (
                 <DesktopMenuItem key={i}>
                     <Link href={item.link}>
-                        <div>
+                        <a>
                             {/*
                             {(typeof item.Icon !== 'undefined') && (
                                 <item.Icon size={25} />
                             )}
                             */}
                             
-                            <a>{item.label}</a>
-                        </div>
+                            {item.label}
+                        </a>
                     </Link>
                 </DesktopMenuItem>
             ))}
