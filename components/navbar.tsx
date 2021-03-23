@@ -70,6 +70,7 @@ const Navbar: FC = () => {
 
 const MobileMenu: FC<MenuProps> = ({ items }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
     const menuRef = useRef();
     const overlayRef = useRef();
 
