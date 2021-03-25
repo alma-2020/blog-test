@@ -67,6 +67,12 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit
                 </p>
+
+               <div className="card-read-more">
+                    <Link href={`/posts/${post.id}`}>
+                        <a>Read more</a>
+                    </Link>
+                </div>
             </div>
                                         
             <small className="card-date">

@@ -1,25 +1,28 @@
 import styled, { css } from 'styled-components'
 
-//const cardBackground = '#E91E63';
 const cardBackground = 'white';
+const cardWidth = '340px';
 
 export const PostCardGridContainer = styled.div`
     display: grid;
     justify-items: center;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
-    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(${cardWidth}, 1fr) );
 `;
 
 export const PostCardDiv = styled.div`
     background: ${cardBackground};
-    width: 300px;
-    //border: 1px solid ${cardBackground};
+    width: ${cardWidth};
     border: none;
     border-radius: 5px;
-    //box-shadow: 0px 0px 10px 0px gray;
-    box-shadow: 0px 2px 3.84px 0.25px gray;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
 
     .post-cover {
         display: block;
@@ -46,14 +49,30 @@ export const PostCardDiv = styled.div`
         padding: 9px;
     }
 
+    .card-read-more {
+        text-align: center;
+    }
+
     .card-description {
         text-align: start;
         font-size: 18px;
-        margin-left: 10px;
 
         p {
-            max-width: 92%;
+            display: block;
+            max-width: 95%;
             margin: 0;
+            margin-left: 10px;
+        }
+
+        a {
+            display: inline-block;
+            background: #E91E63;
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+            margin-top: 10px;
+            border-radius: 4px;
+            width: 97%;
         }
     }
 `;
